@@ -47,4 +47,14 @@ public class MaxMinElements {
     public void setIndexMin(int indexMin) {
         this.indexMin = indexMin;
     }
+
+    @Override
+    public String toString() {
+        return "MaxMinElements{" +
+               "maxNum=" + maxNum +
+               ", minNum=" + minNum +
+               ", indexMax=" + indexMax +
+               ", indexMin=" + indexMin +
+               '}';
+    }
 }

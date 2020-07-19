@@ -1,6 +1,8 @@
 package com.lessons.two;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Lesson2_ArrayClass {
@@ -21,7 +23,7 @@ public class Lesson2_ArrayClass {
  Для усложнения задачи нельзя пользоваться вспомогательными массивами.
      */
 
-    private ArrayList<Integer> arrayOfInteger = null;
+    private int[] arrayOfInteger = null;
     private int sizeOfArray = 0;
 
 
@@ -33,11 +35,12 @@ public class Lesson2_ArrayClass {
     public Lesson2_ArrayClass() {
     }
     //--------------------------------------Getter and Setter methods
-    public ArrayList<Integer> getArrayOfInteger() {
+
+    public int[] getArrayOfInteger() {
         return arrayOfInteger;
     }
 
-    public void setArrayOfInteger(ArrayList<Integer> arrayOfInteger) {
+    public void setArrayOfInteger(int[] arrayOfInteger) {
         this.arrayOfInteger = arrayOfInteger;
     }
 
@@ -48,100 +51,138 @@ public class Lesson2_ArrayClass {
     public void setSizeOfArray(int sizeOfArray) {
         this.sizeOfArray = sizeOfArray;
     }
+
+
     //--------------------------------------Other Methods
 
 
     //---------- Create Array
     public void createArrayWithSize(int sizeOfArray,
-                            Integer random_range) {
+                                    int minRangeElement, int maxRangeElement) {
 
         if(sizeOfArray == 0) {
             sizeOfArray = this.sizeOfArray;
         } else this.sizeOfArray = sizeOfArray;
 
-        if (random_range == null) {
-            arrayOfInteger = new ArrayList<>(sizeOfArray);
-        } else createArrayNotEmpty(sizeOfArray, random_range);
+        if (minRangeElement == 0 && maxRangeElement == 0) {
+            arrayOfInteger = new int[sizeOfArray];
+        } else createArrayNotEmpty(sizeOfArray, minRangeElement, maxRangeElement);
     }
 
     private void createArrayNotEmpty(int sizeOfArray,
-                                     Integer random_range) {
-        Random random = new Random(random_range.intValue());
-        arrayOfInteger = new ArrayList<>(sizeOfArray);
+                                     int minRangeElement, int maxRangeElement) {
 
-        for (int i = 0; i < arrayOfInteger.size()-1; i ++) {
-            arrayOfInteger.add(random.nextInt());
+        arrayOfInteger = new int[sizeOfArray];
+
+        for (int i = 0; i < arrayOfInteger.length; i ++) {
+            arrayOfInteger[i] = (int) (Math.random() * (maxRangeElement - minRangeElement + 1) + minRangeElement);
         }
     }
 
 
     //-----------Check Empty Array
-    public boolean isFullEmpty(ArrayList<Integer> arrayOfInteger) {
+    public boolean isFullEmpty(int[] arrayOfInteger) {
 
         boolean checkEmpty = false;
-
-        for (int i = 0; i < arrayOfInteger.size() -1; i++) {
-            checkEmpty = checkEmpty | arrayOfInteger.get(i).equals(null);
+        boolean currElementIsEmpty = false;
+        for (int i = 0; i < arrayOfInteger.length; i++) {
+            currElementIsEmpty = arrayOfInteger[i] == 0 ? true : false;
+            checkEmpty = checkEmpty | currElementIsEmpty;
         }
         return checkEmpty;
     }
 
     //----------Get Max and Min elements of Array
 
-    public MaxMinElements getMaxElements(ArrayList<Integer> arrayOfInteger) {
+    public MaxMinElements getMaxElements(int[] arrayOfInteger) {
         MaxMinElements max = new MaxMinElements(0,0, 0, 0);
-        for (int i = 0; i < arrayOfInteger.size()-1; i ++) {
-            if (max.getMaxNum() < arrayOfInteger.get(i)) {
-                max.setMaxNum(arrayOfInteger.get(i));
+        for (int i = 0; i < arrayOfInteger.length; i ++) {
+            if (max.getMaxNum() < arrayOfInteger[i]) {
+                max.setMaxNum(arrayOfInteger[i]);
                 max.setIndexMax(i);
             }
-            if(max.getMinNum() > arrayOfInteger.get(i)){
+            if(max.getMinNum() > arrayOfInteger[i]){
                 max.setIndexMin(i);
-                max.setMinNum(arrayOfInteger.get(i));
+                max.setMinNum(arrayOfInteger[i]);
             }
         }
         return max;
     }
 
     //------------------Inspector Gadget
-    public ArrayList<Integer> inspectorGadget (ArrayList<Integer> arrayOfInteger) {
-        for (int i = 0; i<arrayOfInteger.size()-1; i++) {
-            if (arrayOfInteger.get(i) == 0) {
-                arrayOfInteger.set(i,1);
-            } else if (arrayOfInteger.get(1) == 1) arrayOfInteger.set(i,0);
-            else arrayOfInteger.set(i, -1*arrayOfInteger.get(i));
+    public int[] inspectorGadget (int[] arrayOfInteger) {
+        for (int i = 0; i<arrayOfInteger.length; i++) {
+            if (arrayOfInteger[i] == 0) {
+                arrayOfInteger[i] = 1;
+            } else if (arrayOfInteger[i] == 1) arrayOfInteger[i] = 0 ;
+            else arrayOfInteger[i] = -1*arrayOfInteger[i];
         }
 
         return arrayOfInteger;
     }
     //----------------Check Balance
-    public boolean checkBalance(ArrayList<Integer> arrayOfInteger) {
+    public boolean checkBalance(int[] arrayOfInteger) {
         boolean checkBalance = false;
-        int size=arrayOfInteger.size();
-        if (size % 2 != 0) {
-
-        } else {
-            if (sumSubFunction(arrayOfInteger, 0, size/2) == sumSubFunction(arrayOfInteger, size/2, arrayOfInteger.size()))
-                checkBalance = true;
-        }
+        int size=arrayOfInteger.length;
+        int sum1= sumSubFunction(arrayOfInteger, 0, size/2);
+        int sum2= sumSubFunction(arrayOfInteger, size/2, arrayOfInteger.length);
+        if (sum1 == sum2)
+            checkBalance = true;
         return checkBalance;
     }
 
-    private int sumSubFunction(ArrayList<Integer> arrayOfInteger, int start, int stop) {
+    private int sumSubFunction(int[] arrayOfInteger, int start, int stop) {
         int sum = 0;
         for (int i = start; i < stop; i++) {
-            sum = sum + arrayOfInteger.get(i);
+            sum = sum + arrayOfInteger[i];
         }
         return sum;
     }
+    //-----------------Roller Coaster
 
+    public int[] rollerCoaster(int[] arrayOfInteger, int step_n) {
+        int[] integers = arrayOfInteger;
+        if(step_n <0) {
+            integers = leftWheel(arrayOfInteger, Math.abs(step_n));
+        } else {
+            integers = rightWheel(arrayOfInteger, step_n);
+        }
+        return integers;
+    }
 
+    private int[] leftWheel(int[] arrayOfInteger,int step_n) {
+        int tmp = 0;
+        int i,j =0;
+        for (i = 0; i<step_n; i++) {
+            tmp = arrayOfInteger[0];
+            for (j = 0; j<arrayOfInteger.length-1; j++) {
+                arrayOfInteger[j] = arrayOfInteger[j+1];
+            }
+            arrayOfInteger[arrayOfInteger.length-1] = tmp;
+        }
 
+        return null;
+    }
+
+    private int[] rightWheel(int[] arrayOfInteger, int step_n) {
+        int tmp = 0;
+        int i,j =0;
+
+        for (i = 0; i<step_n; i++) {
+
+            tmp = arrayOfInteger[arrayOfInteger.length-1];
+            for (j = arrayOfInteger.length-1; j>0; j--) {
+                arrayOfInteger[j] = arrayOfInteger[j-1];
+            }
+            arrayOfInteger[0] = tmp;
+        }
+        return null;
+    }
 
     @Override
     public String toString() {
         return "Lesson2_ArrayClass{" +
-               "arrayOfInteger=" + arrayOfInteger +
+               "arrayOfInteger=" + Arrays.toString(arrayOfInteger) +
                ", sizeOfArray=" + sizeOfArray +
                '}';
     }
