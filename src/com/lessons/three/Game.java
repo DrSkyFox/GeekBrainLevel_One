@@ -7,9 +7,15 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Game {
+
     private final static Logger logger = Logger.getLogger(Game.class.getName());
 
     private static HashMap<Integer, String> dictionary;
+    private static int numWord;
+    private static int tryingCount = 0;
+    private static int maxCapacityWord = 0;
+    private static boolean autoCapacityEnabled = true;
+
 
     private static class Answer {
         public String Ans;
@@ -17,14 +23,11 @@ public class Game {
     }
 
 
-    private static int numWord;
-    private static int tryingCount = 0;
-    private static int maxCapacityWord = 0;
-    private static boolean autoCappacityEnabled = true;
+
 
     public static void setMaxCapacityWord(int maxCapacityWord) {
         Game.maxCapacityWord = maxCapacityWord;
-        autoCappacityEnabled = false;
+        autoCapacityEnabled = false;
     }
 
     public static Logger getLogger() {
@@ -39,7 +42,7 @@ public class Game {
         dictionary = new HashMap<>();
         for (int i = 0; i < eatable.length; i++) {
             dictionary.put(i, eatable[i]);
-            if (autoCappacityEnabled) autoSettingCappacity(eatable[i]);
+            if (autoCapacityEnabled) autoSettingCappacity(eatable[i]);
         }
         numWord = new Random().nextInt(eatable.length-1);
         System.out.println("Скажи мне, что же я хочу съесть ?");
