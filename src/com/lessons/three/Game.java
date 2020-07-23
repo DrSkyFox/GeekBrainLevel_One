@@ -77,7 +77,7 @@ public class Game {
 
                 System.out.println("Попытайся снова! Текущая попытка № " + tryingCount);
                 System.out.println("Если хочешь сдаться, то набери 'Пощади!'");
-                answer.Ans = scanner.nextLine();
+                answer.Ans = scanner.nextLine().toLowerCase();
             }
 
             if(answer.Ans.equals("Пощади") && game_running ==true) {
