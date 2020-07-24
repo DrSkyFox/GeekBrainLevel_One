@@ -18,8 +18,9 @@ public class Main3 {
                 "pineapple", "pumpkin", "potato"
         };
 
-        Game game = new Game(words);
         Game.setMaxCapacityWord(15);
+        Game game = new Game(words);
+
         LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.OFF);
         game.startGame();
 
