@@ -23,7 +23,10 @@ public class Game {
     }
 
 
-
+    public static void setAutoCapacityEnabled(boolean autoCapacityEnabled) {
+        Game.autoCapacityEnabled = autoCapacityEnabled;
+        System.out.println("autoCapacityEnabled: " +  autoCapacityEnabled);
+    }
 
     public static void setMaxCapacityWord(int maxCapacityWord) {
         Game.maxCapacityWord = maxCapacityWord;
@@ -86,6 +89,7 @@ public class Game {
             }
         }
     }
+
 
     private String changeEnd(int counted) {
         if(counted == 1) {
