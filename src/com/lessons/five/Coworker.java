@@ -26,12 +26,7 @@ public class Coworker {
         this.age = age;
     }
 
-    public Coworker() {
-    }
 
-    public Coworker(String fullName) {
-        this(fullName, null, null);
-    }
 
     public String getPosition() {
         return position;
@@ -63,6 +58,12 @@ public class Coworker {
 
     public void setSalary(int salary) {
         Salary = salary;
+    }
+    public Coworker() {
+    }
+
+    public Coworker(String fullName) {
+        this(fullName, null, null);
     }
 
     public Coworker(String fullName, String position, String email) {
