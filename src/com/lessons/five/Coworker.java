@@ -1,5 +1,7 @@
 package com.lessons.five;
 
+import java.util.Random;
+
 public class Coworker {
 //    * Создать класс "Сотрудник" с полями: ФИО, должность, email, телефон, зарплата, возраст;
 //* Конструктор класса должен заполнять эти поля при создании объекта;
@@ -8,11 +10,11 @@ public class Coworker {
 
 
 
-    String fullName;
-    String position;
-    String email;
-    int numberPhone;
-    int Salary;
+    public String fullName;
+    private String position;
+    private String email;
+    private int numberPhone;
+    private int Salary;
     private int age;
 
 
@@ -22,6 +24,49 @@ public class Coworker {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Coworker() {
+    }
+
+    public Coworker(String fullName) {
+        this(fullName, null, null);
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(int numberPhone) {
+        this.numberPhone = numberPhone;
+    }
+
+    public int getSalary() {
+        return Salary;
+    }
+
+    public void setSalary(int salary) {
+        Salary = salary;
+    }
+
+    public Coworker(String fullName, String position, String email) {
+        this(fullName, position, email, new Random().nextInt(9), new Random().nextInt(), new Random().nextInt(100));
     }
 
     public Coworker(String fullName, String position, String email, int numberPhone, int salary, int age) {
