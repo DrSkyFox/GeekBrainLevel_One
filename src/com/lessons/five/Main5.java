@@ -5,19 +5,27 @@ import java.util.List;
 
 public class Main5 {
     public static void main(String[] args) {
-        List<Coworker> coworkers = new ArrayList<>();
-        coworkers.add(new Coworker("Name 1", "hunter", "hunter@game", 798646645, 40000, 20));
-        coworkers.add(new Coworker("Name 0", "catcher", "cather@game", 123184487, 80000, 30));
-        coworkers.add(new Coworker("Alice", "Persona5", "curo@shakigami", 459273, 0, 936));
-        coworkers.add(new Coworker("Zeux", "child", "baby@childgarden", 0, 1, 1));
-        coworkers.add(new Coworker("Name 1", "hunter", "hunter@game", 798646645, 40000, 20));
+        Coworker[] coworkers = createCoworker();
+        printCW(coworkers);
 
-        coworkers.get(1).tellMeWhoYou();
+        System.out.println(coworkers[2].toString());
 
+    }
 
-        for (int i = 0; i < coworkers.size(); i++) {
-            if(coworkers.get(i).getAge()<30) {
-                System.out.println(coworkers.get(i).toString());
+    private static Coworker[] createCoworker() {
+        Coworker[] coworkers = new Coworker[5];
+        coworkers[0] =  new Coworker("Name 1", "hunter", "hunter@game", 798646645, 40000, 20);
+        coworkers[1] =  new Coworker("Name 0", "catcher", "cather@game", 123184487, 80000, 30);
+        coworkers[2] =  new Coworker("Alice", "Persona5", "curo@shakigami", 459273, 0, 936);
+        coworkers[3] =  new Coworker("Zeux", "child", "baby@childgarden", 0, 1, 1);
+        coworkers[4] =  new Coworker("Name 1", "hunter", "hunter@game", 798646645, 40000, 20);
+        return coworkers;
+    }
+
+    private static void printCW(Coworker[] coworkers) {
+        for (int i = 0; i < coworkers.length; i++) {
+            if(coworkers[i].getAge()>40) {
+                System.out.println(coworkers[i].toString());
             }
 
         }
