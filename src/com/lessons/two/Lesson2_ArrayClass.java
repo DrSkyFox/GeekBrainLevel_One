@@ -86,7 +86,7 @@ public class Lesson2_ArrayClass {
         boolean checkEmpty = false;
         boolean currElementIsEmpty = false;
         for (int i = 0; i < arrayOfInteger.length; i++) {
-            currElementIsEmpty = arrayOfInteger[i] == 0 ? true : false;
+            currElementIsEmpty = arrayOfInteger[i] == 0;
             checkEmpty = checkEmpty | currElementIsEmpty;
         }
         return checkEmpty;

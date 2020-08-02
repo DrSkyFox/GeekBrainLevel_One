@@ -97,10 +97,7 @@ public class Main {
     private static boolean taskSix(short num) {
         if (num < 0) {
             return false;
-        } else if(num >= 0) {
-            return true;
-        }
-        return false;
+        } else return num >= 0;
     }
 
     private static void taskSeven() {

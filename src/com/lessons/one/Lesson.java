@@ -2,13 +2,13 @@ package com.lessons.one;
 
 public class Lesson {
     //class for homework1
-    private byte aByte;
-    private short aLong;
-    private int anInt;
-    private float aFloat;
-    private double aDouble;
-    private char aChar;
-    private boolean aBoolean;
+    private final byte aByte;
+    private final short aLong;
+    private final int anInt;
+    private final float aFloat;
+    private final double aDouble;
+    private final char aChar;
+    private final boolean aBoolean;
 
 
     public Lesson(byte aByte, short aLong, int anInt, float aFloat, double aDouble, char aChar, boolean aBoolean) {
